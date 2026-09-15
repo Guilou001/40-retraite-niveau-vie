@@ -1,0 +1,23 @@
+{
+  "seed": 20260915,
+  "bootstrap_paths": 10000,
+  "bootstrap_blocks_years": [
+    3,
+    5,
+    10
+  ],
+  "horizons_years": [
+    30,
+    40,
+    50
+  ],
+  "initial_wealth": 1000000,
+  "withdrawal_rate": 0.04,
+  "minimum_budget_share": 0.75,
+  "annual_fee": 0.002,
+  "equity_weight": 0.5,
+  "primary_country": "USA",
+  "international_start": 1950,
+  "dynamic_lower": -0.015,
+  "dynamic_upper": 0.05
+}

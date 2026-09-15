@@ -1,0 +1,8 @@
+* text=auto eol=lf
+*.pdf binary
+*.png binary
+*.xlsx binary
+*.svg whitespace=-blank-at-eol
+results/figures/* linguist-generated=true
+rapport/* linguist-generated=true
+uv.lock linguist-generated=true

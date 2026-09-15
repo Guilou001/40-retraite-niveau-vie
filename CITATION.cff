@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "Merci de citer cette étude en précisant sa version et ses sources."
+title: "Faire durer son épargne sans trop réduire son niveau de vie"
+authors:
+  - family-names: Vaudescal
+    given-names: Guillaume
+version: 1.0.0
+date-released: 2026-09-15
+url: "https://github.com/Guilou001/40-retraite-niveau-vie"
+type: software
+license: MIT

@@ -1,0 +1,226 @@
+{
+  "title": "Faire durer son épargne sans trop réduire son niveau de vie",
+  "repository": "https://github.com/Guilou001/40-retraite-niveau-vie",
+  "tables": [
+    {
+      "name": "Résultats",
+      "subtitle": "Départs américains de 40 ans, retraits en pouvoir d’achat constant",
+      "headers": [
+        "Règle",
+        "Départs",
+        "Capital épuisé",
+        "Sous le budget au moins un an",
+        "Années sous le budget en moyenne"
+      ],
+      "formats": [
+        "@",
+        "0",
+        "0.0%",
+        "0.0%",
+        "0.0"
+      ],
+      "rows": [
+        [
+          "Montant constant",
+          110,
+          0.1909090909,
+          0.1909090909,
+          1.3454545454
+        ],
+        [
+          "Pourcentage du solde",
+          110,
+          0.0,
+          0.7454545455,
+          6.7909090909
+        ],
+        [
+          "Ajustement limité",
+          110,
+          0.0,
+          0.2727272727,
+          3.2727272727
+        ],
+        [
+          "Avec budget minimal",
+          110,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "name": "Sensibilités",
+      "subtitle": "Scénarios américains de 40 ans, 10 000 tirages par longueur de bloc",
+      "headers": [
+        "Blocs en années",
+        "Règle",
+        "Capital épuisé",
+        "Sous le budget au moins un an",
+        "Manque cumulé relatif au budget"
+      ],
+      "formats": [
+        "0",
+        "@",
+        "0.0%",
+        "0.0%",
+        "0.0%"
+      ],
+      "rows": [
+        [
+          3,
+          "Montant constant",
+          0.1455,
+          0.1436,
+          0.0357762578
+        ],
+        [
+          3,
+          "Pourcentage du solde",
+          0.0,
+          0.4236,
+          0.0313813312
+        ],
+        [
+          3,
+          "Ajustement limité",
+          0.0928,
+          0.2103,
+          0.0231092781
+        ],
+        [
+          3,
+          "Avec budget minimal",
+          0.1009,
+          0.1003,
+          0.0204832802
+        ],
+        [
+          5,
+          "Montant constant",
+          0.147,
+          0.1451,
+          0.0358256608
+        ],
+        [
+          5,
+          "Pourcentage du solde",
+          0.0,
+          0.4414,
+          0.0311396882
+        ],
+        [
+          5,
+          "Ajustement limité",
+          0.0938,
+          0.2093,
+          0.0241548731
+        ],
+        [
+          5,
+          "Avec budget minimal",
+          0.1017,
+          0.101,
+          0.0216246731
+        ],
+        [
+          10,
+          "Montant constant",
+          0.1554,
+          0.1543,
+          0.040295321
+        ],
+        [
+          10,
+          "Pourcentage du solde",
+          0.0,
+          0.4428,
+          0.0340058974
+        ],
+        [
+          10,
+          "Ajustement limité",
+          0.0975,
+          0.2131,
+          0.0242219058
+        ],
+        [
+          10,
+          "Avec budget minimal",
+          0.1081,
+          0.1076,
+          0.021253707
+        ]
+      ]
+    }
+  ],
+  "example": {
+    "name": "Exemple",
+    "title": "Pourquoi l’ordre des rendements compte",
+    "subtitle": "Modifier les rendements ou le retrait pour comparer les deux ordres.",
+    "cells": [
+      {
+        "row": 7,
+        "label": "Capital initial",
+        "value": 100,
+        "format": "0.00"
+      },
+      {
+        "row": 8,
+        "label": "Premier rendement",
+        "value": -0.2,
+        "format": "0.0%"
+      },
+      {
+        "row": 9,
+        "label": "Deuxième rendement",
+        "value": 0.25,
+        "format": "0.0%"
+      },
+      {
+        "row": 10,
+        "label": "Retrait en fin d’année",
+        "value": 10,
+        "format": "0.00"
+      },
+      {
+        "row": 12,
+        "label": "Solde après la première année",
+        "formula": "=B7*(1+B8)-B10",
+        "format": "0.00"
+      },
+      {
+        "row": 13,
+        "label": "Solde final",
+        "formula": "=B12*(1+B9)-B10",
+        "format": "0.00"
+      },
+      {
+        "row": 15,
+        "label": "Solde intermédiaire, ordre inverse",
+        "formula": "=B7*(1+B9)-B10",
+        "format": "0.00"
+      },
+      {
+        "row": 16,
+        "label": "Solde final, ordre inverse",
+        "formula": "=B15*(1+B8)-B10",
+        "format": "0.00"
+      }
+    ],
+    "checks": {
+      "B13": 77.5,
+      "B16": 82
+    },
+    "mutation": {
+      "input": "B7",
+      "value": 110,
+      "output": "B13",
+      "expected": 87.5
+    }
+  },
+  "sources": [
+    "https://www.macrohistory.net/app/download/9834512469/JSTdatasetR6.dta?t=1720600177"
+  ]
+}
