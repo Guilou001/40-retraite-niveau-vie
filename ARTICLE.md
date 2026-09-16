@@ -63,7 +63,7 @@ Avec une baisse de 10 %, le disponible vaut 864 000 dollars. Les 4 % donneraient
 ## 5. Ce que montrent les trajectoires américaines
 
 | Règle | Capital épuisé | Au moins un an sous le budget | Années sous le budget en moyenne |
-| --- | --- | --- | --- |
+| --- | ---: | ---: | ---: |
 | Montant constant | 19,1 % | 19,1 % | 1,3 |
 | Pourcentage du solde | 0,0 % | 74,5 % | 6,8 |
 | Ajustement limité | 0,0 % | 27,3 % | 3,3 |
@@ -88,7 +88,7 @@ La trajectoire de 1966 permet de suivre ce mécanisme année par année. Les cou
 Les fenêtres de 30 ans sont plus nombreuses que celles de 50 ans. Comparer leurs moyennes brutes mélange l'effet de la durée et celui des dates de départ. Le tableau suivant utilise exactement les mêmes départs pour les trois horizons.
 
 | Durée | Montant constant | Ajustement limité | Avec budget minimal |
-| --- | --- | --- | --- |
+| --- | ---: | ---: | ---: |
 | 30 ans | 6,0 % | 0,0 % | 0,0 % |
 | 40 ans | 20,0 % | 0,0 % | 0,0 % |
 | 50 ans | 32,0 % | 4,0 % | 10,0 % |
@@ -104,7 +104,7 @@ Chaque cellule indique la part des départs où les dépenses passent au moins u
 Les scénarios reconstruits tirent des blocs contigus de trois, cinq ou dix années américaines. Rendements et inflation restent associés. Chaque règle reçoit les mêmes trajectoires, ce qui rend la comparaison appariée. Dix mille trajectoires sont calculées pour chaque longueur de bloc.
 
 | Règle | Capital épuisé | Sous le budget | Manque moyen au budget |
-| --- | --- | --- | --- |
+| --- | ---: | ---: | ---: |
 | Montant constant | 14,7 % | 14,5 % | 3,6 % |
 | Pourcentage du solde | 0,0 % | 44,1 % | 3,1 % |
 | Ajustement limité | 9,4 % | 20,9 % | 2,4 % |

@@ -4,6 +4,8 @@ Une personne retraitée doit choisir combien retirer chaque année. Retirer moin
 
 **Sur {{paths}} départs historiques américains de 40 ans, retirer 4 % du solde chaque année évite l'épuisement du capital. Mais les dépenses passent sous le budget minimal dans {{percentage_shortfall}} % des cas.** Le montant constant épuise le capital dans {{fixed_ruin}} % des cas. Ces observations décrivent des trajectoires passées qui se chevauchent.
 
+[Lire l’article](ARTICLE.md) · [Télécharger le PDF](rapport/rapport.pdf) · [Lire l’audit](docs/AUDIT_2026-09-15.md)
+
 ![Épuisement du capital et baisse des dépenses](results/figures/budget_et_capital.png)
 
 La barre bleue répond à la question « reste-t-il de l'argent ? ». La barre orange répond à la question « le ménage peut-il maintenir son budget minimal ? ». Les deux réponses peuvent être très différentes.

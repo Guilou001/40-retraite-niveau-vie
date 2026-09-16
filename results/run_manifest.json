@@ -1,20 +1,20 @@
 {
-  "completed_at": "2026-09-15T21:09:29.998969+00:00",
-  "seconds": 1.1452040000003763,
+  "completed_at": "2026-09-16T00:08:29.674833+00:00",
+  "seconds": 0.7144162080003298,
   "python": "3.12.14 (main, Aug 14 2026, 15:24:41) [Clang 22.1.3 ]",
   "platform": "macOS-26.6.2-arm64-arm-64bit",
-  "lock_sha256": "eb2446c8d2e2349ef8bf05326631d1963b77a28fbc2bc5ef22bc626f661e4fc8",
+  "lock_sha256": "bb294a511deffdc937be714d3d3ab3ef44d2ceebc7a802e81794e6949c4fc12a",
   "protocol_sha256": "e61af7f28c965b13979d9a9aedd876dbfb012dca7280660d961793aaa830f4de",
   "data_manifest_sha256": "d8a4d9a224ee3c89276c1a63e0d6cf6c57069342bc6e4cb69c1437c603e2fb72",
   "source_files": {
     "src/rnv/__init__.py": "3adec07fa081358786eecaafd64ddfe8ec24f9a586b4710b4f04a3bf745680ca",
-    "src/rnv/cli.py": "917aadc38bd594df961f781f0b8252a02d7a94fe6df822d3f4e2d90ea90c4ce5",
-    "src/rnv/experiment.py": "b8593c93a9167dd39336b991109520d1cf193ca419c5ec8a941e8019e99dbc5d",
-    "src/rnv/model.py": "2b5c44764f6df91f3c496dbaafb4d1167c378e4a1a5909bc96b3491688807bbc",
-    "src/rnv/publication.py": "e7adcb2a6567a5b2cdee406a18455efcb7aa63a8dbaa93097f453677ff2eaac7",
-    "src/rnv/rendering.py": "10351db48e12e6628e59fd91faad30c91688f7e7060fddf8950aa12cdc34d594",
-    "src/rnv/support.py": "327b619a696ac885d7d64ca0f6274520c4ab8afffad347ef77dbc8454486f72b",
-    "src/rnv/workbook_data.py": "fe9fe0dcd6d70c1cd6555a748be757c1d1fd874043fc3569fe727ee6a37e769d"
+    "src/rnv/cli.py": "568652c9445a354f4454f02c398eb8eaaed47aed2de2b15e31e57b2e5ba02b96",
+    "src/rnv/experiment.py": "3e885daef8dc8cf77061a285d270bb5b28fbfc9bc372b462e625462349d4e764",
+    "src/rnv/model.py": "0dac7ec0d058dc717383e9068df33b81c3802b501f801be7bfbc316a02385282",
+    "src/rnv/publication.py": "2578b1716349959b7fa46747d2521cd283e4080e93f1bc5e4f18da4745559ac8",
+    "src/rnv/rendering.py": "c9ff30449f0fe1aa33d9e55fcd16bfcf840faaa89e2507bd7933eade1ae8b313",
+    "src/rnv/support.py": "e9f173b1573ee8c19ab0488288173088f2deb1f0ab3757514a3e7c6c929c2ede",
+    "src/rnv/workbook_data.py": "a87c15a8b4b01bce669b9244782b818c3b2217c5811169d1010d0ac56359fd75"
   },
   "tables": {
     "results/tables/bootstrap_summary.csv": "9d6433485a68a834998882d2ecdd420e3837d8561cdf1c8bb5e221af9c5e179f",
@@ -26,6 +26,7 @@
     "results/tables/historical_summary.csv": "2848cd63abaa9b7e3585f650238bb34adc2afe2602616868c6dbcb7e05e77dfe",
     "results/tables/international.csv": "c8e10d258ae584f012108319fda596966a30f5599dbcf16abf7798170eb5ffd9",
     "results/tables/paired_comparisons.csv": "d56df2d232b7ccc099628ab813223928abce86f3d081d289a74f0329502e259a",
-    "results/tables/spending_distribution.csv": "9db86605c89777ef7412834874cb96f02cefea6fc61fe3dcfc1acd6000f1b075"
+    "results/tables/spending_distribution.csv": "9db86605c89777ef7412834874cb96f02cefea6fc61fe3dcfc1acd6000f1b075",
+    "results/workbook_data.json": "6281596a49cc3ea7abfa7507351fac7e3eca765d40106081fef0bbd4850cd368"
   }
 }

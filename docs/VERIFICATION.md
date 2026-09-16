@@ -33,3 +33,7 @@ uv run pytest
 uv run rnv verify
 uv run python scripts/independent_audit.py
 ```
+
+## Audit après publication
+
+Le [journal d’audit](AUDIT_2026-09-15.md) présente les défauts confirmés et les corrections de la version 1.0.1. Les vérifications incluent désormais toutes les cellules des tableaux Excel et le contrat entre protocole et texte relu.

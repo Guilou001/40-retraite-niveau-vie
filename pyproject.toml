@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "rnv"
-version = "1.0.0"
+version = "1.0.1"
 description = "Faire durer son épargne sans trop réduire son niveau de vie"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"

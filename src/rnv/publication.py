@@ -21,13 +21,16 @@ from .rendering import (
 )
 
 COLORS = [BLUE, ORANGE, TEAL, RED]
+LINESTYLES = {"fixed": "-", "percentage": "--", "dynamic": "-.", "floor": ":"}
 
 
 def read(name):
+    """Lit une table de résultats CSV depuis le dépôt courant."""
     return pd.read_csv(f"results/tables/{name}.csv")
 
 
 def publish():
+    """Produit les quatre figures et insère les résultats dans les textes relus."""
     style()
     h = read("historical_summary")
     primary = h[h.horizon.eq(40)].set_index("rule").loc[list(RULES)]
@@ -69,8 +72,8 @@ def publish():
     fig, axes = plt.subplots(2, 1, figsize=(9, 6.6), sharex=True, layout="constrained")
     for color, (rule, label) in zip(COLORS, RULES.items(), strict=True):
         g = cohort[cohort.rule.eq(rule)]
-        axes[0].plot(g.year, g.spending / 1000, label=label, color=color)
-        axes[1].plot(g.year, g.wealth / 1000, color=color)
+        axes[0].plot(g.year, g.spending / 1000, label=label, color=color, linestyle=LINESTYLES[rule])
+        axes[1].plot(g.year, g.wealth / 1000, color=color, linestyle=LINESTYLES[rule])
     axes[0].axhline(30, color=GREY, ls="--", label="Budget minimal")
     axes[0].set(
         title="Un départ en 1966, quatre règles de retrait",
@@ -122,8 +125,17 @@ def publish():
     fig, axes = plt.subplots(1, 2, figsize=(9, 4.7), sharey=True, layout="constrained")
     for color, (rule, label) in zip(COLORS, RULES.items(), strict=True):
         g = b[b.horizon.eq(40) & b.rule.eq(rule)]
-        axes[0].plot(g.block_years, g.ruin_share * 100, "o-", color=color, label=label)
-        axes[1].plot(g.block_years, g.below_budget_share * 100, "o-", color=color)
+        axes[0].plot(
+            g.block_years,
+            g.ruin_share * 100,
+            marker="o",
+            linestyle=LINESTYLES[rule],
+            color=color,
+            label=label,
+        )
+        axes[1].plot(
+            g.block_years, g.below_budget_share * 100, marker="o", linestyle=LINESTYLES[rule], color=color
+        )
     axes[0].set(title="Capital épuisé", ylabel="Part des scénarios (%)")
     axes[1].set_title("Dépenses sous le budget minimal")
     for ax in axes:
@@ -133,7 +145,13 @@ def publish():
         "Le résultat dépend aussi de la façon de reconstruire les scénarios\n10 000 trajectoires américaines de 40 ans par longueur de bloc",
         fontsize=11,
     )
-    fig.legend(*axes[0].get_legend_handles_labels(), loc="outside lower center", ncol=2, fontsize=8)
+    fig.legend(
+        *axes[0].get_legend_handles_labels(),
+        loc="lower center",
+        bbox_to_anchor=(0.5, -0.13),
+        ncol=2,
+        fontsize=8,
+    )
     save(fig, "sensibilite_blocs")
     bp = b[b.horizon.eq(40) & b.block_years.eq(5)].set_index("rule")
     rows = [

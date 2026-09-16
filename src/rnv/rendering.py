@@ -11,7 +11,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.ticker import FuncFormatter
+from matplotlib.ticker import FuncFormatter, ScalarFormatter
 
 BLUE = "#17659A"
 ORANGE = "#C76D28"
@@ -21,6 +21,7 @@ RED = "#A64545"
 
 
 def style() -> None:
+    """Applique les couleurs et tailles communes aux figures sur fond blanc."""
     plt.rcParams.update(
         {
             "figure.facecolor": "white",
@@ -48,6 +49,7 @@ def style() -> None:
 
 
 def polish(ax, percent: bool = False) -> None:
+    """Allège les axes et place le quadrillage derrière les observations."""
     ax.grid(axis="y", zorder=0)
     ax.set_axisbelow(True)
     if percent:
@@ -55,6 +57,24 @@ def polish(ax, percent: bool = False) -> None:
 
 
 def save(fig, name: str) -> None:
+    # Dates and logarithmic notation retain their dedicated formatters.
+    """Exporte une figure en PNG, SVG et PDF, puis libère sa mémoire."""
+    for axis in fig.axes:
+        for ticks in [axis.xaxis, axis.yaxis]:
+            if isinstance(ticks.get_major_formatter(), ScalarFormatter):
+                ticks.set_major_formatter(
+                    FuncFormatter(lambda value, _: format(value, "g").replace(".", ","))
+                )
+    fig.canvas.draw()
+    bottom = min(0.0, fig.get_tightbbox(fig.canvas.get_renderer()).y0 / fig.get_figheight())
+    fig.text(
+        0.01,
+        bottom - 0.05,
+        "Source JST R6. Trajectoires historiques et simulations distinctes. Calculs du projet.",
+        ha="left",
+        fontsize=8,
+        color=GREY,
+    )
     dest = Path("results/figures")
     dest.mkdir(parents=True, exist_ok=True)
     for suffix in ["png", "svg", "pdf"]:
@@ -63,15 +83,21 @@ def save(fig, name: str) -> None:
 
 
 def number(value: float, decimals: int = 2, percent: bool = False, signed: bool = False) -> str:
+    """Formate un nombre avec virgule décimale et unité facultative en pourcentage."""
     result = format(value * (100 if percent else 1), ("+" if signed else "") + f",.{decimals}f")
     return result.replace(",", " ").replace(".", ",")
 
 
 def table(headers: list[str], rows: list[list]) -> str:
+    """Prépare le tableau de lecture en conservant les colonnes et leur ordre."""
+    numeric = [
+        all(re.fullmatch(r"[-+−]?[\d\s.,]+(?:\s*%)?", str(row[j])) for row in rows)
+        for j in range(len(headers))
+    ]
     return "\n".join(
         [
             "| " + " | ".join(headers) + " |",
-            "| " + " | ".join(["---"] * len(headers)) + " |",
+            "| " + " | ".join("---:" if is_number else "---" for is_number in numeric) + " |",
             *["| " + " | ".join(map(str, row)) + " |" for row in rows],
         ]
     )
@@ -123,10 +149,21 @@ def compile_article(repo: str) -> None:
     body = document.corps
     for tag, math in substitutions.items():
         body = body.replace(tag, math)
+    markdown_tables = re.findall(r"(?m)^\|[^\n]+\|\n(\|[ :\-|]+\|)\n", text)
+    alignments = iter(markdown_tables)
+
+    def align_table(match):
+        markers = next(alignments).strip().strip("|").split("|")
+        columns = ["right" if marker.strip().endswith(":") else "left" for marker in markers]
+        return match.group(0).replace(
+            "align: left + top", "align: (" + ", ".join(c + " + top" for c in columns) + ")"
+        )
+
+    body = re.sub(r"#table\(\s*columns: \d+,.*?align: left \+ top", align_table, body, flags=re.S)
     source = GABARIT.format(
         titre=chaine(document.titre),
         titre_affiche=ligne(document.titre),
-        pied="Document de recherche · Version 1.0",
+        pied="Document de recherche · Version 1.0.1",
         date="15 septembre 2026",
         depot=f"https://github.com/Guilou001/{repo}",
         depot_court=f"Guilou001/{repo}",
@@ -141,6 +178,7 @@ def compile_article(repo: str) -> None:
     )
     source = source.replace("it => block(above: 1.6em", "it => block(sticky: true, above: 1.6em")
     source = source.replace("#text(size: 18pt, weight:", "#text(hyphenate: false, size: 18pt, weight:")
+    source = source.replace("#align(center)[", "#align(center)[\n  #set par(justify: false)", 1)
     source = "#set figure.caption(separator: [. ])\n" + source
     p = Path("rapport")
     p.mkdir(exist_ok=True)

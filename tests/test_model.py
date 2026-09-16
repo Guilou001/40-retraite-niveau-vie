@@ -82,3 +82,9 @@ def test_blocks_preserve_consecutive_years():
 def test_invalid_observations_rejected(r, pi):
     with pytest.raises(ValueError):
         simulate(r, pi, "fixed")
+
+
+@pytest.mark.parametrize("field", ["initial", "upper"])
+def test_infinite_policy_parameters_are_rejected(field):
+    with pytest.raises(ValueError, match="finis"):
+        Policy(**{field: np.inf})

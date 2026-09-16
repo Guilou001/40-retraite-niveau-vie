@@ -4,6 +4,7 @@ from dataclasses import dataclass
 
 import numpy as np
 import pandas as pd
+from numpy.typing import ArrayLike
 
 RULES = {
     "fixed": "Montant constant",
@@ -23,13 +24,19 @@ class Policy:
     fee: float = 0.002
 
     def __post_init__(self):
+        if not np.isfinite(
+            [self.initial, self.rate, self.minimum_share, self.lower, self.upper, self.fee]
+        ).all():
+            raise ValueError("Paramètres finis requis")
         if not (self.initial > 0 and 0 < self.rate < 1 and 0 < self.minimum_share <= 1):
             raise ValueError("Capital, taux de retrait ou budget minimal invalide")
         if not (-1 < self.lower <= 0 <= self.upper and 0 <= self.fee < 1):
             raise ValueError("Limites de dépenses ou frais invalides")
 
 
-def simulate(returns, inflation, rule: str, policy: Policy = Policy()):
+def simulate(
+    returns: ArrayLike, inflation: ArrayLike, rule: str, policy: Policy = Policy()
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Renvoie patrimoine et dépenses réels pour chaque trajectoire et année.
 
     La première dépense vaut rate * initial en monnaie de départ. Le taux
@@ -68,7 +75,8 @@ def simulate(returns, inflation, rule: str, policy: Policy = Policy()):
     return paid, balances, unfunded
 
 
-def measure(paid, balances, unfunded, policy: Policy):
+def measure(paid: np.ndarray, balances: np.ndarray, unfunded: np.ndarray, policy: Policy) -> pd.DataFrame:
+    """Mesure épuisement, dépenses insuffisantes et richesse finale par trajectoire."""
     minimum = policy.initial * policy.rate * policy.minimum_share
     below = paid < minimum - 1e-8
     run = np.zeros(paid.shape[0], dtype=int)
@@ -91,7 +99,8 @@ def measure(paid, balances, unfunded, policy: Policy):
     )
 
 
-def summary(frame):
+def summary(frame: pd.DataFrame) -> dict:
+    """Agrège les résultats des trajectoires sans les considérer indépendantes."""
     return {
         "paths": len(frame),
         "ruin_share": frame.ruined.mean(),

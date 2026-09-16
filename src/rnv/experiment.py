@@ -10,6 +10,7 @@ from .support import block_indices, config, save_table
 
 
 def load_panel():
+    """Charge les sources, aligne les dates et applique les unités documentées."""
     d = pd.read_stata("data/raw/jst.dta", convert_categoricals=False).sort_values(["iso", "year"])
     d["inflation"] = d.groupby("iso").cpi.pct_change(fill_method=None)
     d["portfolio"] = config()["equity_weight"] * d.eq_tr + (1 - config()["equity_weight"]) * d.bond_tr
@@ -17,6 +18,7 @@ def load_panel():
 
 
 def historical_windows(d, horizon):
+    """Extrait des trajectoires annuelles complètes, sans relier une année manquante."""
     starts, r, pi = [], [], []
     for i in range(len(d) - horizon + 1):
         window = d.iloc[i : i + horizon]
@@ -31,6 +33,7 @@ def historical_windows(d, horizon):
 
 
 def run():
+    """Exécute l’expérience et les sensibilités annoncées dans le protocole."""
     c = config()
     policy = Policy(
         initial=c["initial_wealth"],
@@ -104,7 +107,7 @@ def run():
     simulated, envelopes, comparisons = [], [], []
     rng = np.random.default_rng(c["seed"])
     for block in c["bootstrap_blocks_years"]:
-        idx = block_indices(len(complete), c["bootstrap_paths"], 50, block, rng)
+        idx = block_indices(len(complete), c["bootstrap_paths"], max(c["horizons_years"]), block, rng)
         r, pi = complete.portfolio.to_numpy()[idx], complete.inflation.to_numpy()[idx]
         for horizon in c["horizons_years"]:
             paired = {}

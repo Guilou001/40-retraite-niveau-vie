@@ -48,3 +48,11 @@ Le classeur livré est un instantané de consultation, créé avec `scripts/expo
 `verify` contrôle les empreintes du code et des tables depuis le dernier calcul, puis la correspondance entre l’article Markdown et le PDF. Un changement de code après `run` impose une nouvelle exécution. Le fichier `results/run_manifest.json` contient la provenance du calcul.
 
 La CI exécute le contrôle de style, les tests sans téléchargement et les contrôles de cohérence des artefacts publiés. Elle ne récupère pas les données et ne doit donc pas être confondue avec une nouvelle exécution complète de l’étude.
+
+## Adapter une hypothèse sans conserver une conclusion périmée
+
+Le fichier config/protocol.json porte les paramètres du calcul. config/publication_protocol.json conserve ceux qui correspondent aux textes relus. Une différence arrête publish avant la génération. Modifier seulement ce second fichier pour passer le contrôle ne suffit pas à valider une nouvelle expérience.
+
+Pour une nouvelle étude, recalculer les tables, adapter les sélections et illustrations, puis relire chaque conclusion. Le script de préparation Excel doit aussi correspondre aux nouvelles hypothèses. Mettre à jour le protocole de publication après cette revue.
+
+La commande verify compare désormais le classeur avec la sélection préparée. Une différence exige de régénérer l’export Excel. Le temps du calcul initial est enregistré en secondes dans results/run_manifest.json. Il exclut les téléchargements et la composition des figures et du PDF.

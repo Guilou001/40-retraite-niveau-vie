@@ -38,6 +38,8 @@ def publish():
     from .publication import publish as render
 
     support.check_results()
+    support.check_publication_protocol()
+    support.check_workbook()
     render()
     support.finish_publication()
 

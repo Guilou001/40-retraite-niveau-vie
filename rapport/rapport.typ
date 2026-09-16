@@ -7,7 +7,7 @@
   footer: context [
     #set text(size: 8pt, fill: luma(90))
     #grid(columns: (1fr, auto), align: (left, right),
-      [Document de recherche · Version 1.0], [#counter(page).display("1 / 1", both: true)])
+      [Document de recherche · Version 1.0.1], [#counter(page).display("1 / 1", both: true)])
   ],
 )
 #set text(font: ("Libertinus Serif", "Times New Roman", "DejaVu Serif"), size: 10.5pt, lang: "fr")
@@ -30,6 +30,7 @@
 #show link: it => text(fill: rgb("#0072B2"), it)
 
 #align(center)[
+  #set par(justify: false)
   #block(width: 100%)[
     #text(hyphenate: false, size: 18pt, weight: "bold")[Faire durer son épargne sans trop réduire son niveau de vie]
     #v(0.6em)
@@ -61,7 +62,7 @@ Notre question est plus précise. Une règle qui améliore la survie du portefeu
 #table(
   columns: 3,
   stroke: (x, y) => if y == 0 { (bottom: 0.6pt) } else { none },
-  align: left + top,
+  align: (left + top, left + top, left + top),
   inset: 5pt,
     [*Élément*],
     [*Papier de Vanguard*],
@@ -116,7 +117,7 @@ Avec une baisse de 10 %, le disponible vaut 864 000 dollars. Les 4 % donneraient
 #table(
   columns: 4,
   stroke: (x, y) => if y == 0 { (bottom: 0.6pt) } else { none },
-  align: left + top,
+  align: (left + top, right + top, right + top, right + top),
   inset: 5pt,
     [*Règle*],
     [*Capital épuisé*],
@@ -161,7 +162,7 @@ Les fenêtres de 30 ans sont plus nombreuses que celles de 50 ans. Comparer leur
 #table(
   columns: 4,
   stroke: (x, y) => if y == 0 { (bottom: 0.6pt) } else { none },
-  align: left + top,
+  align: (left + top, right + top, right + top, right + top),
   inset: 5pt,
     [*Durée*],
     [*Montant constant*],
@@ -194,7 +195,7 @@ Les scénarios reconstruits tirent des blocs contigus de trois, cinq ou dix ann�
 #table(
   columns: 4,
   stroke: (x, y) => if y == 0 { (bottom: 0.6pt) } else { none },
-  align: left + top,
+  align: (left + top, right + top, right + top, right + top),
   inset: 5pt,
     [*Règle*],
     [*Capital épuisé*],
